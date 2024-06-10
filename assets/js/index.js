@@ -11,9 +11,18 @@ class Vehicle {
   }
 
   get age() {
-    return (
-      new Date().getFullYear() - new Date(this.manufactureDate).getFullYear()
-    );
+    const today = new Date();
+    const dayProduction = new Date(this.manufactureDate);
+
+    let age = today.getFullYear() - dayProduction.getFullYear();
+    const mounthDiff = today.getMonth() - dayProduction.getMonth();
+    const dayDiff = today.getDay() - dayProduction.getDay();
+
+    if (mounthDiff < 0 || (mounthDiff === 0 && dayDiff < 0)) {
+      return age - 1;
+    }
+
+    return age;
   }
 }
 
